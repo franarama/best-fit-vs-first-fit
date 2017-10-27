@@ -101,7 +101,50 @@ while n <= math.pow(2,5):
     i = i + 1
     n = math.pow(2,i)
 
+## best fit function -- so far--- i think i should quit computing
+# science because sometimes i can't figure out very simple things :( :(
+# hope it will work
+def best_fit_algorithm(server,jobs):
+    server_size = len(server)
+    job_size = len(jobs)
+ #Stores block id of the block allocated to a process
+    m=0
+    k=0
+    best_fit_array = []
+#Initially no block is assigned to any process
+    for k in range (len(best_fit_array)):
+        best_fit_array [k] = -1
+ #   pick each process and find suitable blocks according to its size ad assign to it
+    for i in jobs:
+        #Find the best fit block for current process
+        index = -1
+        k = k+1
+        for j in  server:
+            if (server[m]>=jobs[k]):
+                if (index == -1):
+                    index = j
+                elif (server[index]>server[m]):
+                    index = j
+        m = m+1
+        #If we could find a block for current process
+        if (index !=-1):
+            #allocate block j to best_fit_array[i] process
+            best_fit_array [i] = index
+            #Reduce available memory in this server.
+            server[index] -= jobs[i]
+        
+    for i in job_size:
+        if (best_fit_array[i] != -1):
+            best_fit_array = best_fit_array[i] + 1
+    return best_fit_array
+             
 
+server = [233,3333,333,333,33]
+jobs = [233,222,2222,22,0]
+
+a=best_fit_algorithm(server,jobs)
+
+print(a)
 
 
 
